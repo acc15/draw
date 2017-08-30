@@ -1,9 +1,7 @@
 import React from 'react';
-import './App.css';
 import Draw from "./Draw";
 
-const App = () => <div className="App">
+const App = () => <div>
     <Draw width="800" height="600"/>
-
 </div>;
 export default App;
