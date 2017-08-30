@@ -2,7 +2,15 @@
   "name": "draw",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:4000",
+  "proxy": {
+      "/api": {
+          "target": "http://localhost:4000/api"
+      },
+      "/": {
+          "target": "ws://localhost:4000",
+          "ws": true
+      }
+  },
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
