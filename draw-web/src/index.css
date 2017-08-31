@@ -2,7 +2,7 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
     background-color: lightgray;
 }
 
@@ -19,3 +19,44 @@ html, body {
     height: 100%;
     padding: 15px 15px 0;
 }
+
+
+.form-element {
+    width: 400px;
+    margin: 0 auto 15px auto;
+    font-size: 20px;
+    text-align: center;
+
+}
+
+.form-element input {
+    width: 190px;
+    height: 30px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin-left: 8px;
+    font-size: 16px;
+}
+
+.form-element label {
+    float: left;
+    width: 190px;
+    height: 30px;
+    line-height: 30px;
+    text-align: right;
+}
+
+.form-element button {
+    width: 200px;
+    height: 30px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid darkgray;
+    background: lightgray;
+}
+
+.form-element button:active {
+    background-color: #eee;
+}
+

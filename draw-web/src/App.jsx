@@ -1,10 +1,10 @@
 import React from 'react';
-import Draw from "./Draw";
+import Join from "./Join";
 
 const App = () => <div id="app">
 
     <div>Draw!</div>
+    <Join/>
 
-    <Draw width="800" height="600"/>
 </div>;
 export default App;

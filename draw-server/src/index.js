@@ -9,13 +9,32 @@ const pub = process.env.PUB || "../draw-web/build";
 const wss = expressWs(express());
 const app = wss.app;
 
+function parseCommand(cmd) {
+    return JSON.parse(cmd);
+}
+
+const w = wss.getWss("/ws");
+
 app
 .use(morgan("tiny"))
 .ws("/ws", (ws, req) => {
-    ws.on("message", msg => console.log("message from " + ws + ": " + msg));
-    ws.on('close', () => console.log('ws disconnected'));
-    ws.send("hello");
     console.log("ws connected: " + req.url);
+    ws.on("message", msg => {
+        console.log("message from " + ws + ": " + msg);
+
+        const cmd = parseCommand(msg);
+        if (cmd.c === "join") {
+            ws.data = { name: cmd.p.name };
+
+            w.clients.forEach(client => {
+                if (client !== ws && client.data) {
+                    client.send(JSON.stringify({ c: "j", p: {name: cmd.p.name }}));
+                    ws.send(JSON.stringify({ c: "j", p: {name: client.data.name }}));
+                }
+            });
+        }
+    });
+    ws.on('close', () => w.clients.forEach(c => c !== w && c.data && c.send(JSON.stringify({ c: "l", p: {name: c.data.name }}))));
 })
 .use(express.static(pub))
 .use((req, res, next) => {
